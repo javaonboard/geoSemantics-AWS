@@ -1,0 +1,26 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-ampgeosemantics-dev-63308-authRole",
+            "UnauthRoleArn": "arn:aws:iam::765207276357:role/amplify-ampgeosemantics-dev-63308-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::765207276357:role/amplify-ampgeosemantics-dev-63308-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-ampgeosemantics-dev-63308-deployment",
+            "UnauthRoleName": "amplify-ampgeosemantics-dev-63308-unauthRole",
+            "StackName": "amplify-ampgeosemantics-dev-63308",
+            "StackId": "arn:aws:cloudformation:us-east-2:765207276357:stack/amplify-ampgeosemantics-dev-63308/7c2e9570-7cb3-11eb-b1de-02931e372fa4",
+            "AmplifyAppId": "ddpyr5y8d4trf"
+        },
+        "categories": {
+            "auth": {
+                "ampgeosemantics771b8b87": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "ddpyr5y8d4trf",
+                    "type": "manual"
+                }
+            }
+        }
+    }
+}
