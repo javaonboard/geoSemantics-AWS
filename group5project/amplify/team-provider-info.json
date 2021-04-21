@@ -1,26 +1,26 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-geopretrainedmodel-dev-121221-authRole",
-            "UnauthRoleArn": "arn:aws:iam::765207276357:role/amplify-geopretrainedmodel-dev-121221-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::765207276357:role/amplify-geopretrainedmodel-dev-121221-authRole",
-            "Region": "us-east-2",
-            "DeploymentBucketName": "amplify-geopretrainedmodel-dev-121221-deployment",
-            "UnauthRoleName": "amplify-geopretrainedmodel-dev-121221-unauthRole",
-            "StackName": "amplify-geopretrainedmodel-dev-121221",
-            "StackId": "arn:aws:cloudformation:us-east-2:765207276357:stack/amplify-geopretrainedmodel-dev-121221/6b3260e0-97c4-11eb-96fe-02ea77822190",
-            "AmplifyAppId": "d2d40ktzq9p5n6"
-        },
-        "categories": {
-            "auth": {
-                "geopretrainedmodelc09c28c1": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d2d40ktzq9p5n6",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-geopretrainedmodel-dev-121221-authRole",
+      "UnauthRoleArn": "arn:aws:iam::765207276357:role/amplify-geopretrainedmodel-dev-121221-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::765207276357:role/amplify-geopretrainedmodel-dev-121221-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-geopretrainedmodel-dev-121221-deployment",
+      "UnauthRoleName": "amplify-geopretrainedmodel-dev-121221-unauthRole",
+      "StackName": "amplify-geopretrainedmodel-dev-121221",
+      "StackId": "arn:aws:cloudformation:us-east-2:765207276357:stack/amplify-geopretrainedmodel-dev-121221/6b3260e0-97c4-11eb-96fe-02ea77822190",
+      "AmplifyAppId": "d2d40ktzq9p5n6"
+    },
+    "categories": {
+      "auth": {
+        "geopretrainedmodelc09c28c1": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2d40ktzq9p5n6",
+          "type": "manual"
         }
+      }
     }
+  }
 }
