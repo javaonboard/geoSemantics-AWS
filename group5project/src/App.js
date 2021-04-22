@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 // Import Amplify and Storage
-import Amplify, { Storage } from 'aws-amplify';
 // withAuthenticator is a higher order component that wraps the application with a login page
 import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
 // Import the project config files and configure them with Amplify
+import Amplify, { Storage } from 'aws-amplify';
 import awsconfig from './aws-exports';
-
 Amplify.configure(awsconfig);
 
 const App = () => {
