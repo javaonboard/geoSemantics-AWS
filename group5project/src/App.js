@@ -8,37 +8,39 @@ import Amplify, { Storage } from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
-const App = () => {
-  const [imageUrl, setImageUrl] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  //const downloadUrl = async () => {
-   // Creates download url that expires in 5 minutes/ 300 seconds
-   // const downloadUrl = await Storage.get('picture.jpg', { expires: 300 });
-   // window.location.href = downloadUrl
-  //}
-  const handleChange = async (e) => 
-  {
-    const file = e.target.files[0];
-    const fileUploadname=e.target.files[0].name;
- 
-    try {
-      setLoading(true);
-      // Upload the file to s3 with public access level. 
-
-
-      await Storage.put(fileUploadname,file, {
-        contentType: 'application/pdf'
-      });
-      // Retrieve the uploaded file to display
-      const url = await Storage.get('Wolfcamp.pdf', { level: 'public' })
-      setImageUrl(url);
-      setLoading(false);
-    } 
-    catch (err) {
-      console.log(err);
+function App() {
+    //get the file  from browser
+    const [file, setFile]=useState();
+    // check the status on the file uploaded
+    const[uploaded,setUploaded]=useState(false);
+    
+  
+    
+  
+    async function getfile(e){
+      setFile(e.target.files[0]);
     }
-  }
+  
+    async function Downloaded()
+    {
+      
+      const downloadURL= await Storage.get(file.name);
+      window.location.href = downloadURL;
+    }
+  
+    async function UploadFile() {    
+      try {
+        
+       const storeResult= await Storage.put(file.name, file, {
+          contentType: 'application.pdf' // contentType is optional
+        });
+        setUploaded(true)
+        console.log(storeResult);
+  
+      } catch (error) {
+        console.log('Error uploading file: ', error);
+      }  
+    }
 
   return (
     <div>
@@ -69,27 +71,26 @@ const App = () => {
           <div class='container'>
             <div class='box-1'>
               <label>Upload a PDF: </label>
-              {loading ? <h3>Uploading...</h3> : <input
-                type='file' accept='image/jpg'
-                onChange={(evt) => handleChange(evt)}
-              />}
-            
-              {imageUrl ? <img style={{ width: '30rem' }} src={'https://i.imgur.com/xezlE2x'} alt='File not found'/> : <span />}
-
+              <input
+                type='file'
+                onChange={(evt) => getfile(evt)}
+              />
+              <button onClick={async () => {UploadFile()
+                }}>Upload The File To S3</button>
+             {uploaded
+                ? <div>Your file is uploaded!</div>
+                : <div>Upload a PDF to get started</div>}
               <br/>
               
               <label>Download the results: </label>
-              <select name='results' id=''>
-                        <option value='placeholder_report_1'>placeholder_report_1</option>
-                        <option value='placeholder_report_2'>placeholder_report_2</option>
-                        <option value='placeholder_report_3'>placeholder_report_3</option>
-              </select>
-              <button>Download Report</button>  
+              <div>
+              <button onClick={() => Downloaded()}>Click Here To Download</button>
+        
+              </div> 
             </div>
           </div>
           <br/>
           <br/>
-
       </body>
 
     </div>
