@@ -54,6 +54,7 @@ body{
 
 #navbar a:hover{
   color:orange;
+  font-weight: bold;
 }
 
 #navbar a:active{
