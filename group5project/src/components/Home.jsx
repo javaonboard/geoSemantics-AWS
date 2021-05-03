@@ -4,10 +4,12 @@ function Home() {
   return (
     <div className="services">
       <body>
-        <h1>In Home</h1>
-                
-        <br/>
-        <br/>   
+        <section id="showcase">
+          <div className="container">
+            <h1>Find Key Geoscience Terms</h1>
+            <p>Submit a PDF through this website to get it inferenced for chronostrat words! </p>
+          </div>
+        </section>
 
       </body>
     </div>

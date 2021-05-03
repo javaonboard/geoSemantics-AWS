@@ -4,11 +4,11 @@ function History() {
   return (
     <div className="history">
       <body>
-        <h1>In History</h1>
-                
-        <br/>
-        <br/>   
-
+        <section className="main">
+          <div className="container">
+            <h1>In History</h1> 
+          </div>
+        </section>
       </body>
     </div>
   );

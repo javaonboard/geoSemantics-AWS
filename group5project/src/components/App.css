@@ -1,0 +1,65 @@
+body{
+    background-color: #f4f4f4;
+    color: #555;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+/* Global */
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* Signout Button */
+#signout{
+  float: right;
+  width: 150px;
+  overflow: hidden;
+}
+
+/* Header */ 
+#main-header{
+  background-color: #343A40;
+  color: #f4f4f4;
+  padding-top: 30px;
+  min-height: 70px;
+}
+
+/* Showcase */
+#showcase{
+  min-height: 400px;
+  border-top:#e8491d 3px solid;
+  background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://getwallpapers.com/wallpaper/full/0/7/8/1281297-large-geology-wallpaper-2880x1920-for-macbook.jpg') no-repeat 0 -500px;
+  background-size: auto;
+  text-align: center;
+  color: #f4f4f4;
+}
+
+#showcase h1{
+  margin-top: 100px;
+  margin-bottom: 30px;
+  font-size: 55px;
+  font-weight: bold;
+}
+
+#showcase p{
+  font-size: 20px;
+}
+
+/* Main */
+.main{
+  border-top:#e8491d 3px solid;
+  color: #555;
+}
+
+.main img{
+  width: 200px;
+  height: 200px;
+  border: 3px #e8491d solid;
+  border-radius: 15px;
+}
+

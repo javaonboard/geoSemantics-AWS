@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navigation, Home, About, Services, History } from "./components";
-import './App.css';
+import { Navigation, Home, About, Services, History, Footer } from "./components";
+import './components/App.css';
 // Import Amplify and Storage
 // withAuthenticator is a higher order component that wraps the application with a login page
 import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
 // Import the project config files and configure them with Amplify
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
+import "bootstrap/dist/css/bootstrap.min.css";
+import UploadFiles from "./components/upload-files.component.js";
 
 Amplify.configure(awsconfig);
 
@@ -16,7 +18,7 @@ function App() {
     <div>
       <header id='main-header'>
           <div className='container'>
-            <h1>Find Key Geoscience Terms</h1>
+            <h1>Geosemantics</h1>
             <div id='signout'>
               <AmplifySignOut/>
             </div>
@@ -25,13 +27,15 @@ function App() {
       
       <Router>
         <Navigation />
-        <Switch>
+         <Switch>
           <Route path="/" exact component={() => <Home />} />
           <Route path="/about" exact component={() => <About />} />
-          <Route path="/services" exact component={() => <Services />} />
+          <Route path="/services" exact component={() => <UploadFiles />} />  
           <Route path="/history" exact component={() => <History />} />
-        </Switch>
-      </Router>  
+         </Switch>
+         <Footer />
+      </Router>
+
     </div>
   );
 }

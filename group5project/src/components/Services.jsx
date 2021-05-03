@@ -35,32 +35,42 @@ function Services() {
 return (
   <div className="services">
     <body>
-      <nav id='navbar'>
+      <section className="main">
+
+        <div className="container">
+          <h1>Process</h1>
+          <ol>
+            <li>Browse for PDF</li>
+            <li>Upload your PDF. It's sent to an S3 bucket.</li>
+            <li>PDF gets converted to .txt file</li>
+            <li>.txt file gets inferenced by the pre-trained Machine Learning Model.</li>
+            <li>Result file is sent back to S3 bucket.</li>
+            <li>User can then download the results.</li>
+          </ol>
+        </div>
         <div className='container'>
+          <div className='box-1'>
+            <label>Upload a PDF: </label>
+            <input
+              type='file'
+              onChange={(evt) => getfile(evt)}
+            />
+            <button onClick={async () => {UploadFile()
+              }}>Upload The File To S3</button>
+            {uploaded
+              ? <div>Your file is uploaded!</div>
+              : <div>Upload a PDF to get started</div>}
+            <br/>
+              
+            <label>Download the results: </label>
+            <div>
+              <button onClick={() => Downloaded()}>Click Here To Download</button>
+            </div> 
+          </div>
         </div>
-      </nav>
 
-      <div className='container'>
-        <div className='box-1'>
-          <label>Upload a PDF: </label>
-          <input
-            type='file'
-            onChange={(evt) => getfile(evt)}
-          />
-          <button onClick={async () => {UploadFile()
-            }}>Upload The File To S3</button>
-          {uploaded
-            ? <div>Your file is uploaded!</div>
-            : <div>Upload a PDF to get started</div>}
-          <br/>
-            
-          <label>Download the results: </label>
-          <div>
-            <button onClick={() => Downloaded()}>Click Here To Download</button>
-          </div> 
-        </div>
-      </div>
-
+      </section>
+      
       <br/>
       <br/>
 
