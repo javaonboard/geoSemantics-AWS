@@ -19,8 +19,7 @@ export default class UploadFiles extends Component {
       status: "",
       fileName: "",
       result: "",
-      fileInfos: [],
-      createdURL:""
+      fileInfos: []
     };
   }
 
@@ -43,7 +42,6 @@ export default class UploadFiles extends Component {
                 currentFile: currentFile
               });
               
-                // eslint-disable-next-line no-restricted-globals
                 UploadService.upload(currentFile, (event) => {
                   this.setState({
                     progress: Math.round((100 * event.loaded) / event.total),
@@ -53,11 +51,9 @@ export default class UploadFiles extends Component {
                   this.setState({
                     message: response.data.message,
                     status: response.data.status,
-                    result: response.data.result,
-                    createdURL: response.data.url
+                    result: response.data.result
                   });
-             
-                  //if(response.data.result!=null) this.removeSlashes(response.data.result)
+
                   return response.data;
                 })
                 .then((files) => {
@@ -73,7 +69,7 @@ export default class UploadFiles extends Component {
                     currentFile: undefined,
                   });
                 });
-                // eslint-disable-next-line no-restricted-globals
+
   }
 
 
@@ -84,8 +80,7 @@ export default class UploadFiles extends Component {
       progress,
       message,
       status,
-      result,
-      createdURL
+      result
     } = this.state;
 
     return (
@@ -123,10 +118,6 @@ export default class UploadFiles extends Component {
 
         <div className="card">
           <div className="card-header">Status: {status}</div> 
-          <div className="card">
-          <div className="card-header"><a class="button" href={createdURL}><button className="btn btn-info"
-          disabled={!result}>Download</button></a></div>
-         </div>
         </div>
 
         <div className="alert alert-light" role="alert">
