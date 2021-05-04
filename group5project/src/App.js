@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navigation, Home, About, Services, History, Footer } from "./components";
+import { Navigation, Home, About, Services, Footer } from "./components";
 import './components/App.css';
 // Import Amplify and Storage
 // withAuthenticator is a higher order component that wraps the application with a login page
@@ -17,22 +17,13 @@ Amplify.configure(awsconfig);
 function App() {
   return (
     <div>
-      <header id='main-header'>
-          <div className='container'>
-            <h1>Geosemantics</h1>
-            <div id='signout'>
-              <AmplifySignOut/>
-            </div>
-          </div>
-      </header>
-      
+
       <Router>
         <Navigation />
          <Switch>
           <Route path="/" exact component={() => <Home />} />
           <Route path="/about" exact component={() => <About />} />
           <Route path="/services" exact component={() => <UploadFiles />} />  
-          <Route path="/history" exact component={() => <History />} />
          </Switch>
          <Footer />
       </Router>
