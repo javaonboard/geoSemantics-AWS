@@ -11,8 +11,7 @@ class UploadFilesService {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
         "x-api-key": "tPn8h8nmzi1vYEdPVKAyn5DGLXiHOdKq4uKuqGrX",
-        "InvocationType": "Event",
-        "Access-Control-Allow-Origin": "*" 
+        "InvocationType": "Event"
       },
       onUploadProgress,
     });

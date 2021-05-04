@@ -2,6 +2,7 @@ import { selectInput } from "@aws-amplify/ui";
 import React, { Component } from "react";
 import UploadService from "../services/upload-files.service";
 import {Data} from './Data'
+import { Auth } from 'aws-amplify';
 
 export default class UploadFiles extends Component {
 
@@ -11,7 +12,7 @@ export default class UploadFiles extends Component {
     super(props);
     this.selectFile = this.selectFile.bind(this);
     this.upload = this.upload.bind(this);
-    this.downloadS3 = this.downloadS3.bind(this);
+    
     this.state = {
       selectedFiles: undefined,
       currentFile: undefined,
@@ -33,15 +34,11 @@ export default class UploadFiles extends Component {
     });
   }
 
-  downloadS3(){
-    var AWS = require('aws-sdk');
-    var s3 = new AWS.S3({accessKeyId:'AKIA3EKPINNCQMSC72MV', secretAccessKey:'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', region:'us-east-2'});
-    var params = {Bucket: 'geo-user-data', Key: 'output/'+this.fileName};
-    s3.getSignedUrl('getObject', params, function (err, url) {
-    console.log('Your generated pre-signed URL is', url);
-    this.createdURL = url;
-    });
-  }
+
+  getUser() {
+    let user = Auth.user.username;
+    return user;
+    }
 
   upload() {
               console.log("uploading the file");
@@ -53,6 +50,7 @@ export default class UploadFiles extends Component {
                 currentFile: currentFile
               });
               
+                console.log( "username is: ", this.getUser() );
                 // eslint-disable-next-line no-restricted-globals
                 UploadService.upload(currentFile, (event) => {
                   this.setState({
@@ -64,9 +62,10 @@ export default class UploadFiles extends Component {
                     message: response.data.message,
                     status: response.data.status,
                     result: response.data.result,
-                    fileName: response.data.fileName
+                    createdURL: response.data.url
                   });
-                  console.log("fileName "+ response.data.fileName);
+                  console.log("download "+ response.data.url);
+                  console.log("createdUrl "+ this.state.createdURL);
   
                   if(response.data.result!=null) this.removeSlashes(response.data.result)
                   return response.data;
@@ -111,7 +110,8 @@ export default class UploadFiles extends Component {
       description,
       resultPage,
       result,
-      fileName
+      fileName,
+      createdURL
     } = this.state;
 
     return (
@@ -150,10 +150,8 @@ export default class UploadFiles extends Component {
         <div className="card">
           <div className="card-header">Status: {status}</div> 
           <div className="card">
-        
-         <button disabled={!selectedFiles} className="btn btn-info" onClick={this.downloadS3} type="submit">Download</button>
-      
-      </div>
+          <a class="button" href={createdURL}>Download</a>
+         </div>
         </div>
 
         <div className="alert alert-light" role="alert">
