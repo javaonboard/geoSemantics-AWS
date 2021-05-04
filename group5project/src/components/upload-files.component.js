@@ -32,10 +32,10 @@ export default class UploadFiles extends Component {
   }
 
   upload() {
-              
+
               console.log("uploading the file");
               let currentFile = this.state.selectedFiles[0];
-        
+
               this.setState({
                 message: "",
                 progress: 0,
@@ -83,6 +83,7 @@ export default class UploadFiles extends Component {
       result
     } = this.state;
 
+
     return (
       <div className="services">
         {currentFile && (
@@ -103,14 +104,15 @@ export default class UploadFiles extends Component {
         <label className="btn btn-default">
           <input type="file" onChange={this.selectFile} />
         </label>
-
-        <button
-          className="btn btn-success"
-          disabled={!selectedFiles}
-          onClick={this.upload}
-        >
-          Upload
-        </button>
+        
+        <div ontouchstart="">
+          <div className="button"
+            disabled={!selectedFiles}
+            onClick={this.upload}
+          >
+            <a href="#">Analyze</a>
+          </div>
+        </div>
 
         <div className="alert alert-light" role="alert">
           {message}
@@ -118,6 +120,7 @@ export default class UploadFiles extends Component {
 
         <div className="card">
           <div className="card-header">Status: {status}</div> 
+
         </div>
 
         <div className="alert alert-light" role="alert">
@@ -128,4 +131,3 @@ export default class UploadFiles extends Component {
     );
   }
 }
-
