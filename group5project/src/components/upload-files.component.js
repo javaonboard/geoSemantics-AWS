@@ -1,8 +1,6 @@
 import { selectInput } from "@aws-amplify/ui";
 import React, { Component } from "react";
 import UploadService from "../services/upload-files.service";
-import {Data} from './Data'
-import { Auth } from 'aws-amplify';
 
 export default class UploadFiles extends Component {
 
@@ -34,23 +32,17 @@ export default class UploadFiles extends Component {
     });
   }
 
-
-  getUser() {
-    let user = Auth.user.username;
-    return user;
-    }
-
   upload() {
+              
               console.log("uploading the file");
               let currentFile = this.state.selectedFiles[0];
-              console.log("file name "+ this.state.selectedFiles[2]);
+        
               this.setState({
                 message: "",
                 progress: 0,
                 currentFile: currentFile
               });
               
-                console.log( "username is: ", this.getUser() );
                 // eslint-disable-next-line no-restricted-globals
                 UploadService.upload(currentFile, (event) => {
                   this.setState({
@@ -64,10 +56,8 @@ export default class UploadFiles extends Component {
                     result: response.data.result,
                     createdURL: response.data.url
                   });
-                  console.log("download "+ response.data.url);
-                  console.log("createdUrl "+ this.state.createdURL);
-  
-                  if(response.data.result!=null) this.removeSlashes(response.data.result)
+             
+                  //if(response.data.result!=null) this.removeSlashes(response.data.result)
                   return response.data;
                 })
                 .then((files) => {
@@ -75,29 +65,17 @@ export default class UploadFiles extends Component {
                     fileInfos: files.data,
                   });
                 })
-                .catch(() => {
+                .catch((ex) => {
+                  console.log(ex.message);
                   this.setState({
                     progress: 0,
-                    message: "Could not upload the file!",
+                    message: "There was an issue!",
                     currentFile: undefined,
                   });
                 });
                 // eslint-disable-next-line no-restricted-globals
-
   }
 
-  sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
-  removeSlashes(str){
-    for(let i=0; i<str.length; i++){
-      if(str[i]==="/")str[i] = "";
-    }
-    this.setState({
-      result : str
-    });
-  }
 
   render() {
     const {
@@ -105,12 +83,8 @@ export default class UploadFiles extends Component {
       currentFile,
       progress,
       message,
-      fileInfos,
       status,
-      description,
-      resultPage,
       result,
-      fileName,
       createdURL
     } = this.state;
 
@@ -150,7 +124,8 @@ export default class UploadFiles extends Component {
         <div className="card">
           <div className="card-header">Status: {status}</div> 
           <div className="card">
-          <a class="button" href={createdURL}>Download</a>
+          <div className="card-header"><a class="button" href={createdURL}><button className="btn btn-info"
+          disabled={!result}>Download</button></a></div>
          </div>
         </div>
 
