@@ -1,70 +1,101 @@
+import { selectInput } from "@aws-amplify/ui";
 import React, { Component } from "react";
 import UploadService from "../services/upload-files.service";
+import {Data} from './Data'
+import { Auth } from 'aws-amplify';
 
 export default class UploadFiles extends Component {
+
+  
   constructor(props) {
+
     super(props);
     this.selectFile = this.selectFile.bind(this);
     this.upload = this.upload.bind(this);
-
+    
     this.state = {
       selectedFiles: undefined,
       currentFile: undefined,
       progress: 0,
       message: "",
-
+      status: "",
+      fileName: "",
+      result: "",
       fileInfos: [],
+      createdURL:""
     };
   }
 
-  componentDidMount() {
-    UploadService.getFiles().then((response) => {
-      this.setState({
-        fileInfos: response.data,
-      });
-    });
-  }
 
   selectFile(event) {
     this.setState({
       selectedFiles: event.target.files,
+      
     });
   }
 
+
+  getUser() {
+    let user = Auth.user.username;
+    return user;
+    }
+
   upload() {
-    let currentFile = this.state.selectedFiles[0];
+              console.log("uploading the file");
+              let currentFile = this.state.selectedFiles[0];
+              console.log("file name "+ this.state.selectedFiles[2]);
+              this.setState({
+                message: "",
+                progress: 0,
+                currentFile: currentFile
+              });
+              
+                console.log( "username is: ", this.getUser() );
+                // eslint-disable-next-line no-restricted-globals
+                UploadService.upload(currentFile, (event) => {
+                  this.setState({
+                    progress: Math.round((100 * event.loaded) / event.total),
+                  });
+              })
+                .then((response) => {
+                  this.setState({
+                    message: response.data.message,
+                    status: response.data.status,
+                    result: response.data.result,
+                    createdURL: response.data.url
+                  });
+                  console.log("download "+ response.data.url);
+                  console.log("createdUrl "+ this.state.createdURL);
+  
+                  if(response.data.result!=null) this.removeSlashes(response.data.result)
+                  return response.data;
+                })
+                .then((files) => {
+                  this.setState({
+                    fileInfos: files.data,
+                  });
+                })
+                .catch(() => {
+                  this.setState({
+                    progress: 0,
+                    message: "Could not upload the file!",
+                    currentFile: undefined,
+                  });
+                });
+                // eslint-disable-next-line no-restricted-globals
 
+  }
+
+  sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  removeSlashes(str){
+    for(let i=0; i<str.length; i++){
+      if(str[i]==="/")str[i] = "";
+    }
     this.setState({
-      progress: 0,
-      currentFile: currentFile,
-    });
-
-    UploadService.upload(currentFile, (event) => {
-      this.setState({
-        progress: Math.round((100 * event.loaded) / event.total),
-      });
-    })
-      .then((response) => {
-        this.setState({
-          message: response.data.message,
-        });
-        return UploadService.getFiles();
-      })
-      .then((files) => {
-        this.setState({
-          fileInfos: files.data,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          progress: 0,
-          message: "Could not upload the file!",
-          currentFile: undefined,
-        });
-      });
-
-    this.setState({
-      selectedFiles: undefined,
+      result : str
     });
   }
 
@@ -75,6 +106,12 @@ export default class UploadFiles extends Component {
       progress,
       message,
       fileInfos,
+      status,
+      description,
+      resultPage,
+      result,
+      fileName,
+      createdURL
     } = this.state;
 
     return (
@@ -111,17 +148,18 @@ export default class UploadFiles extends Component {
         </div>
 
         <div className="card">
-          <div className="card-header">List of Files</div>
-          <ul className="list-group list-group-flush">
-            {fileInfos &&
-              fileInfos.map((file, index) => (
-                <li className="list-group-item" key={index}>
-                  <a href={file.url}>{file.name}</a>
-                </li>
-              ))}
-          </ul>
+          <div className="card-header">Status: {status}</div> 
+          <div className="card">
+          <a class="button" href={createdURL}>Download</a>
+         </div>
         </div>
+
+        <div className="alert alert-light" role="alert">
+        <div dangerouslySetInnerHTML={{__html:result}}></div>
+        </div>
+        
       </div>
     );
   }
 }
+

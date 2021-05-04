@@ -10,6 +10,7 @@ import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import "bootstrap/dist/css/bootstrap.min.css";
 import UploadFiles from "./components/upload-files.component.js";
+import { Data } from './components'
 
 Amplify.configure(awsconfig);
 
