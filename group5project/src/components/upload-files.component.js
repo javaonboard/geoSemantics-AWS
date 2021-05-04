@@ -1,8 +1,6 @@
 import { selectInput } from "@aws-amplify/ui";
 import React, { Component } from "react";
 import UploadService from "../services/upload-files.service";
-import {Data} from './Data'
-import { Auth } from 'aws-amplify';
 
 export default class UploadFiles extends Component {
 
@@ -34,23 +32,24 @@ export default class UploadFiles extends Component {
     });
   }
 
-
-  getUser() {
-    let user = Auth.user.username;
-    return user;
-    }
-
   upload() {
+<<<<<<< HEAD
+
               console.log("uploading the file");
               let currentFile = this.state.selectedFiles[0];
-              console.log("file name "+ this.state.selectedFiles[2]);
+
+=======
+              
+              console.log("uploading the file");
+              let currentFile = this.state.selectedFiles[0];
+        
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
               this.setState({
                 message: "",
                 progress: 0,
                 currentFile: currentFile
               });
               
-                console.log( "username is: ", this.getUser() );
                 // eslint-disable-next-line no-restricted-globals
                 UploadService.upload(currentFile, (event) => {
                   this.setState({
@@ -64,10 +63,14 @@ export default class UploadFiles extends Component {
                     result: response.data.result,
                     createdURL: response.data.url
                   });
+<<<<<<< HEAD
                   console.log("download "+ response.data.url);
                   console.log("createdUrl "+ this.state.createdURL);
   
-                  if(response.data.result!=null) this.removeSlashes(response.data.result)
+=======
+             
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
+                  //if(response.data.result!=null) this.removeSlashes(response.data.result)
                   return response.data;
                 })
                 .then((files) => {
@@ -75,29 +78,17 @@ export default class UploadFiles extends Component {
                     fileInfos: files.data,
                   });
                 })
-                .catch(() => {
+                .catch((ex) => {
+                  console.log(ex.message);
                   this.setState({
                     progress: 0,
-                    message: "Could not upload the file!",
+                    message: "There was an issue!",
                     currentFile: undefined,
                   });
                 });
                 // eslint-disable-next-line no-restricted-globals
-
   }
 
-  sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
-  removeSlashes(str){
-    for(let i=0; i<str.length; i++){
-      if(str[i]==="/")str[i] = "";
-    }
-    this.setState({
-      result : str
-    });
-  }
 
   render() {
     const {
@@ -105,14 +96,11 @@ export default class UploadFiles extends Component {
       currentFile,
       progress,
       message,
-      fileInfos,
       status,
-      description,
-      resultPage,
       result,
-      fileName,
       createdURL
     } = this.state;
+
 
     return (
       <div className="services">
@@ -134,14 +122,15 @@ export default class UploadFiles extends Component {
         <label className="btn btn-default">
           <input type="file" onChange={this.selectFile} />
         </label>
-
-        <button
-          className="btn btn-success"
-          disabled={!selectedFiles}
-          onClick={this.upload}
-        >
-          Upload
-        </button>
+        
+        <div ontouchstart="">
+          <div className="button"
+            disabled={!selectedFiles}
+            onClick={this.upload}
+          >
+            <a href="#">Analyze</a>
+          </div>
+        </div>
 
         <div className="alert alert-light" role="alert">
           {message}
@@ -150,7 +139,12 @@ export default class UploadFiles extends Component {
         <div className="card">
           <div className="card-header">Status: {status}</div> 
           <div className="card">
-          <a class="button" href={createdURL}>Download</a>
+<<<<<<< HEAD
+          <div className="card-header"><a href={createdURL}><button className="btn btn-info"
+=======
+          <div className="card-header"><a class="button" href={createdURL}><button className="btn btn-info"
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
+          disabled={!result}>Download</button></a></div>
          </div>
         </div>
 
@@ -162,4 +156,3 @@ export default class UploadFiles extends Component {
     );
   }
 }
-

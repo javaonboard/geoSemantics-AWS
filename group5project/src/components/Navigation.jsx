@@ -6,7 +6,7 @@ import Amplify from 'aws-amplify';
 
 function Navigation(props) {
   return (
-    <div className="navigation">
+    <div className="navigation fixed-top">
 
       <header id='main-header'>
         <div className='container'>
