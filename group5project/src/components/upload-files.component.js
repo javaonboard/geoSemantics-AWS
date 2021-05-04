@@ -34,15 +34,21 @@ export default class UploadFiles extends Component {
 
   upload() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
               console.log("uploading the file");
               let currentFile = this.state.selectedFiles[0];
 
 =======
+=======
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
               
               console.log("uploading the file");
               let currentFile = this.state.selectedFiles[0];
         
+<<<<<<< HEAD
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
+=======
 >>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
               this.setState({
                 message: "",
@@ -64,9 +70,13 @@ export default class UploadFiles extends Component {
                     createdURL: response.data.url
                   });
 <<<<<<< HEAD
+<<<<<<< HEAD
                   console.log("download "+ response.data.url);
                   console.log("createdUrl "+ this.state.createdURL);
   
+=======
+             
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
 =======
              
 >>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
@@ -140,7 +150,11 @@ export default class UploadFiles extends Component {
           <div className="card-header">Status: {status}</div> 
           <div className="card">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div className="card-header"><a href={createdURL}><button className="btn btn-info"
+=======
+          <div className="card-header"><a class="button" href={createdURL}><button className="btn btn-info"
+>>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
 =======
           <div className="card-header"><a class="button" href={createdURL}><button className="btn btn-info"
 >>>>>>> 475232d4235c2f2cf2480464ce7badcfeb7815af
