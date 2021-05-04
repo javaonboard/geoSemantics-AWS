@@ -78,7 +78,7 @@ export default class UploadFiles extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="services">
         {currentFile && (
           <div className="progress">
             <div

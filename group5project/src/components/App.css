@@ -1,10 +1,10 @@
 body{
-    background-color: #f4f4f4;
-    color: #555;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    line-height: 1.6em;
-    margin: 0;
+  background-color: #f4f4f4;
+  color: #555;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px; 
+  line-height: 1.6em;
+  margin: 0;
 }
 
 /* Global */
@@ -14,36 +14,68 @@ body{
   overflow: hidden;
 }
 
-/* Signout Button */
-#signout{
-  float: right;
-  width: 150px;
-  overflow: hidden;
+.clr{
+  clear: both;
 }
 
 /* Header */ 
 #main-header{
   background-color: #343A40;
   color: #f4f4f4;
-  padding-top: 30px;
-  min-height: 70px;
+  padding-top: 20px;
+}
+
+#main-header h1{
+  font-weight: bold;
+  width: 95%;
+  float: right;
+  text-transform: uppercase;
+}
+
+#main-header img{
+  float: left;
+  width: 50px;
+  margin-top: 4px;
+}
+
+/* Signout Button */
+#signout{
+  float: right;
+  width: 15%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Navigation */
+.navigation {
+  border-bottom:#e8491d 3px solid;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+/* Services */
+.services{
+  margin-top: 200px;
 }
 
 /* Showcase */
 #showcase{
-  min-height: 400px;
-  border-top:#e8491d 3px solid;
+  min-height: 1100px;
   background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://getwallpapers.com/wallpaper/full/0/7/8/1281297-large-geology-wallpaper-2880x1920-for-macbook.jpg') no-repeat 0 -500px;
   background-size: auto;
   text-align: center;
   color: #f4f4f4;
+  margin-top: 184px;
 }
 
 #showcase h1{
-  margin-top: 100px;
+  margin-top: 200px;
   margin-bottom: 30px;
   font-size: 55px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 #showcase p{
@@ -52,7 +84,7 @@ body{
 
 /* Main */
 .main{
-  border-top:#e8491d 3px solid;
+  margin-top: 200px;
   color: #555;
 }
 
@@ -63,3 +95,71 @@ body{
   border-radius: 15px;
 }
 
+/* Description */
+.description {
+  margin-bottom: 10px;
+  line-height: 1.6em;
+}
+
+.description h1{
+  text-decoration: underline;
+  padding-bottom: 10px;
+}
+
+/* Sponsor */
+.sponsor{
+  border: 2px #ccc solid;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 225px;
+  border-radius: 15px;
+}
+
+.sponsor h2{
+  font-weight: bold;
+}
+
+.sponsor img{
+  float: left;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.sponsor p{
+  float: right;
+  width: 80%;
+  box-sizing: border-box;
+  margin-top: 15px;
+  font-size: 18px;
+  line-height: 1.6em;
+}
+
+/* Team */
+.team {
+  border: 2px #ccc solid;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 225px;
+  border-radius: 15px;
+  margin-bottom: 200px;
+}
+
+.team h2{
+  font-weight: bold;
+}
+
+.team img{
+  float: left;
+  width: auto;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+.team p{
+  float: right;
+  width: 80%;
+  box-sizing: border-box;
+  margin-top: 15px;
+  font-size: 18px;
+  line-height: 1.6em;
+}
