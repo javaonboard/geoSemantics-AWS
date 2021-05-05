@@ -1,12 +1,13 @@
 import http from "../http-common.js";
 
 class UploadFilesService {
+
   upload(file, onUploadProgress) {
     let formData = new FormData();
-
+    let response = undefined;
     formData.append("file", file);
 
-    return http.post("/Geo-Semantic-invoke-endpoint", formData, {
+    response = http.post("/Geo-Semantic-invoke-endpoint", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "Accept": "application/json",
@@ -15,6 +16,10 @@ class UploadFilesService {
       },
       onUploadProgress,
     });
+    
+  
+    
+    return response;
   }
 
 }

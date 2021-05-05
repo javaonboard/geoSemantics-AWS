@@ -10,8 +10,8 @@ export default class UploadFiles extends Component {
     super(props);
     this.selectFile = this.selectFile.bind(this);
     this.upload = this.upload.bind(this);
-    
     this.state = {
+      count: 0,
       selectedFiles: undefined,
       currentFile: undefined,
       progress: 0,
@@ -30,9 +30,10 @@ export default class UploadFiles extends Component {
       
     });
   }
-
+  
   upload() {
-
+              let m5 = ["Spinning the hamster…","Don't worry - a few bits tried to escape, but we caught them",
+              "It's still faster than you could draw it","Wait, do you smell something burning?","I swear it's almost done.","Time flies when you’re having fun."];
               console.log("uploading the file");
               let currentFile = this.state.selectedFiles[0];
 
@@ -40,8 +41,10 @@ export default class UploadFiles extends Component {
                 message: "",
                 progress: 0,
                 currentFile: currentFile
+                
               });
               
+                let temp ="";
                 UploadService.upload(currentFile, (event) => {
                   this.setState({
                     progress: Math.round((100 * event.loaded) / event.total),
@@ -53,23 +56,28 @@ export default class UploadFiles extends Component {
                     status: response.data.status,
                     result: response.data.result
                   });
-
+                  temp = response.data.result;
+                  if(response.data.result===undefined) {
+                    if(this.state.count<=5){
+                    this.setState({
+                      status: m5[this.state.count],
+                      count: this.state.count + 1
+                    });
+                  }
+                    this.upload();
+                  } 
                   return response.data;
                 })
-                .then((files) => {
-                  this.setState({
-                    fileInfos: files.data,
-                  });
-                })
-                .catch((ex) => {
+               .catch((ex) => {
                   console.log(ex.message);
                   this.setState({
                     progress: 0,
                     message: "There was an issue!",
                     currentFile: undefined,
+                    count: 0
                   });
                 });
-
+                        
   }
 
 
