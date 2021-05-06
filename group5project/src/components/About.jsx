@@ -2,11 +2,10 @@ import React from "react";
 
 function About() {
   return (
-    <div className="about">
-      <body>
+    <body>
+      <div className="about">
         <section className="main">
           <div className="container">
-
             <section className="sponsor">
               <h2>Sponsor</h2>
               <img src="https://media-exp1.licdn.com/dms/image/C5103AQGqHEA9UmehYw/profile-displayphoto-shrink_200_200/0/1583239733298?e=1625702400&v=beta&t=q5Usp-W8x88NMp-g42t-K2gjvdtnsoJNs8j_jHmhsmw" alt=""/>
@@ -104,12 +103,11 @@ function About() {
               <div class="clr"></div>
 
               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae dignissimos corporis nemo aperiam quaerat sunt sapiente rem impedit cumque harum, facere dolore debitis distinctio reiciendis esse laboriosam illo possimus ex.</p>
-
             </section> 
           </div>
         </section>
-      </body>
-    </div>
+      </div>
+    </body>
   );
 }
 

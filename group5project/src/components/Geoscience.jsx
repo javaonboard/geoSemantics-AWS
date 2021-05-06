@@ -2,11 +2,10 @@ import React from "react";
 
 function About() {
   return (
-    <div className="about">
-      <body>
+    <body>
+      <div className="about-geoscience">
         <section className="main">
           <div className="container">
-
             <section className="description">
               <h1>What is Geoscience?</h1>
               <p>Geoscience is the study of the Earth - its oceans, atmosphere, rivers and lakes, ice sheets and glaciers, soils, its complex surface, rocky interior, and metallic core. This includes many aspects of how living things, including humans, interact with the Earth. Geoscience has many tools and practices of its own but is intimately linked with the biological, chemical, and physical sciences.
@@ -36,13 +35,11 @@ function About() {
 
               <p>We also used services provided by AWS, as each of them has its own development tools and functionality that can help with each other to create solutions for filtering texts. These services will help extend capability for application to data reports that are usually stored in a PDF format.
               </p>
-
             </section>
-
           </div>
         </section>
-      </body>
     </div>
+  </body>
   );
 }
 

@@ -9,11 +9,9 @@ function Home() {
         <section id="showcase">
           <div className="container">
             <h1>Find Key Geoscience Terms</h1>
-
             <div className="button">
               <Link to="/services">Evaluate Your Document</Link>
             </div>
-
           </div>
         </section>
       </body>

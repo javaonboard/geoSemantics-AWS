@@ -90,48 +90,51 @@ export default class UploadFiles extends Component {
 
 
     return (
-      <div className="services">
-        {currentFile && (
-          <div className="progress">
-            <div
-              className="progress-bar progress-bar-info progress-bar-striped"
-              role="progressbar"
-              aria-valuenow={progress}
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style={{ width: progress + "%" }}
-            >
-              {progress}%
+      <body>
+        <div className="about-services">
+          <div className="services">
+            {currentFile && (
+              <div className="progress">
+                <div
+                  className="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  aria-valuenow={progress}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style={{ width: progress + "%" }}
+                >
+                  {progress}%
+                </div>
+              </div>
+            )}
+
+            <label className="btn btn-default">
+              <input type="file" onChange={this.selectFile} />
+            </label>
+            
+            <div ontouchstart="">
+              <div className="button"
+                disabled={!selectedFiles}
+                onClick={this.upload}
+              >
+                <a href="#">Analyze</a>
+              </div>
+            </div>
+
+            <div className="alert alert-light" role="alert">
+              {message}
+            </div>
+
+            <div className="card">
+              <div className="card-header">Status: {status}</div> 
+            </div>
+
+            <div className="alert alert-light" role="alert">
+              <div dangerouslySetInnerHTML={{__html:result}}></div>
             </div>
           </div>
-        )}
-
-        <label className="btn btn-default">
-          <input type="file" onChange={this.selectFile} />
-        </label>
-        
-        <div ontouchstart="">
-          <div className="button"
-            disabled={!selectedFiles}
-            onClick={this.upload}
-          >
-            <a href="#">Analyze</a>
-          </div>
         </div>
-
-        <div className="alert alert-light" role="alert">
-          {message}
-        </div>
-
-        <div className="card">
-          <div className="card-header">Status: {status}</div> 
-        </div>
-
-        <div className="alert alert-light" role="alert">
-          <div dangerouslySetInnerHTML={{__html:result}}></div>
-        </div>
-        
-      </div>
+      </body>
     );
   }
 }

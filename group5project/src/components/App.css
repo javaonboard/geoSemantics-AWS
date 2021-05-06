@@ -75,7 +75,6 @@
 
 /* Main */
 .main{
-  margin-top: 200px;
   color: #555;
 }
 
@@ -86,10 +85,40 @@
   border-radius: 15px;
 }
 
+/* About */
+.about-geoscience{
+  margin-top: 135px;
+  background:linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.imgur.com/IWS7qlx.jpg') repeat;
+  background-size: contain;
+  background-position: 50% -55%;
+}
+
+.about{
+  margin-top: 135px;
+  background:linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.imgur.com/IWS7qlx.jpg') repeat;
+  background-size: contain;
+  background-position: 50% 56%;
+}
+
+.about-services{
+  min-height: 1053px;
+  margin-top: 135px;
+  padding-top: 65px;
+  padding-bottom: 50px;
+  background:linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.imgur.com/IWS7qlx.jpg') repeat;
+  background-size: 2560px 1440px;
+  background-position: 50% 50%;
+}
+
 /* Description */
 .description {
+  border: 2px #ccc solid;
+  margin-top: 65px;
   margin-bottom: 200px;
+  padding-bottom: 50px;
   line-height: 1.6em;
+  background-color: #f4f4f4;
+  border-radius: 15px;
 }
 
 .description img{
@@ -125,10 +154,13 @@
 /* Sponsor */
 .sponsor{
   border: 2px #ccc solid;
+  background-color: #f4f4f4;
   padding-top: 5px;
   padding-bottom: 50px;
   border-radius: 15px;
+  box-sizing: border-box;
   margin: auto;
+  margin-top: 65px;
   width: 55%;
 }
 
@@ -178,6 +210,7 @@
 /* Team */
 .team {
   border: 2px #ccc solid;
+  background-color: #f4f4f4;
   padding-top: 5px;
   padding-bottom: 50px;
   border-radius: 15px;
@@ -232,6 +265,7 @@
 /* Services */
 .services{
   border: 2px #ccc solid;
+  background-color: #f4f4f4;
   border-radius: 15px;
 
   padding-top: 10px;
@@ -239,7 +273,6 @@
   padding-right: 15px;
 
   margin: auto;
-  margin-top: 200px;
   margin-bottom: 150px;
 
   width: 70%;
