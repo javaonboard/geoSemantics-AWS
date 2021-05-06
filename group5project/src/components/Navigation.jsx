@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
-import Amplify from 'aws-amplify';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 
 function Navigation(props) {
@@ -10,18 +9,22 @@ function Navigation(props) {
 
       <header id='main-header'>
         <div className='container'>
+          <img src="https://cdn.discordapp.com/attachments/809157200622387225/838663802555465728/circle-cropped.png" alt="logo"/>
           <h1>Geosemantics</h1>
-            <img src="https://cdn.discordapp.com/attachments/809157200622387225/838663802555465728/circle-cropped.png" alt="logo"/>
-            <div id='signout'>
-              <AmplifySignOut/>
-            </div>
+            
+          <div id='signout'>
+            <AmplifySignOut/>
+          </div>
+          
         </div>
       </header>      
+
+      <div class="clr"></div>
 
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <div className="container">
           <div>
-            <ul className="navbar-nav ml-auto">
+            <ul className="navbar-nav">
               <li
                 className={`nav-item  ${
                   props.location.pathname === "/" ? "active" : ""
@@ -30,6 +33,16 @@ function Navigation(props) {
                 <Link className="nav-link" to="/">
                   HOME
                   <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+
+              <li
+                className={`nav-item  ${
+                  props.location.pathname === "/geoscience" ? "active" : ""
+                }`}
+              >
+                <Link className="nav-link" to="/geoscience">
+                  GEOSCIENCE
                 </Link>
               </li>
 

@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Navigation, Services } from "/";
 
 function Home() {
   return (
@@ -7,7 +9,11 @@ function Home() {
         <section id="showcase">
           <div className="container">
             <h1>Find Key Geoscience Terms</h1>
-            <p>Submit a PDF at the services tab to get it inferenced for chronostrat words! </p>
+
+            <div className="button">
+              <Link to="/services">Evaluate Your Document</Link>
+            </div>
+
           </div>
         </section>
       </body>

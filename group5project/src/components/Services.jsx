@@ -1,82 +1,137 @@
-import React, { useState } from 'react';
-import Amplify, { Storage } from 'aws-amplify';
+import React, { Component } from "react";
+import UploadService from "../services/upload-files.service";
 
-function Services() {
-  //get the file  from browser
-  const [file, setFile]=useState();
-  // check the status on the file uploaded
-  const[uploaded,setUploaded]=useState(false);
+export default class UploadFiles extends Component {
+
   
-  async function getfile(e){
-    setFile(e.target.files[0]);
+  constructor(props) {
+
+    super(props);
+    this.selectFile = this.selectFile.bind(this);
+    this.upload = this.upload.bind(this);
+    this.state = {
+      count: 0,
+      selectedFiles: undefined,
+      currentFile: undefined,
+      progress: 0,
+      message: "",
+      status: "",
+      fileName: "",
+      result: "",
+      fileInfos: []
+    };
   }
 
-  async function Downloaded()
-  {
-    
-    const downloadURL= await Storage.get(file.name);
-    window.location.href = downloadURL;
-  }
 
-  async function UploadFile() {    
-    try {
+  selectFile(event) {
+    this.setState({
+      selectedFiles: event.target.files,
       
-     const storeResult= await Storage.put(file.name, file, {
-        contentType: 'application.pdf' // contentType is optional
-      });
-      setUploaded(true)
-      console.log(storeResult);
+    });
+  }
+  
+  upload() {
+              let m5 = ["Spinning the hamster…","Don't worry - a few bits tried to escape, but we caught them",
+              "It's still faster than you could draw it","Wait, do you smell something burning?","I swear it's almost done.","Time flies when you’re having fun."];
+              console.log("uploading the file");
+              let currentFile = this.state.selectedFiles[0];
 
-    } catch (error) {
-      console.log('Error uploading file: ', error);
-    }  
-  }    
-
-return (
-  <div className="services">
-    <body>
-      <section className="main">
-
-        <div className="container">
-          <h1>Process</h1>
-          <ol>
-            <li>Browse for PDF</li>
-            <li>Upload your PDF. It's sent to an S3 bucket.</li>
-            <li>PDF gets converted to .txt file</li>
-            <li>.txt file gets inferenced by the pre-trained Machine Learning Model.</li>
-            <li>Result file is sent back to S3 bucket.</li>
-            <li>User can then download the results.</li>
-          </ol>
-        </div>
-        <div className='container'>
-          <div className='box-1'>
-            <label>Upload a PDF: </label>
-            <input
-              type='file'
-              onChange={(evt) => getfile(evt)}
-            />
-            <button onClick={async () => {UploadFile()
-              }}>Upload The File To S3</button>
-            {uploaded
-              ? <div>Your file is uploaded!</div>
-              : <div>Upload a PDF to get started</div>}
-            <br/>
+              this.setState({
+                message: "",
+                progress: 0,
+                currentFile: currentFile
+                
+              });
               
-            <label>Download the results: </label>
-            <div>
-              <button onClick={() => Downloaded()}>Click Here To Download</button>
-            </div> 
+                UploadService.upload(currentFile, (event) => {
+                  this.setState({
+                    progress: Math.round((100 * event.loaded) / event.total),
+                  });
+              })
+                .then((response) => {
+                  this.setState({
+                    message: response.data.message,
+                    status: response.data.status,
+                    result: response.data.result
+                  });
+                  if(response.data.result===undefined) {
+                    if(this.state.count<=5){
+                    this.setState({
+                      status: m5[this.state.count],
+                      count: this.state.count + 1
+                    });
+                  }
+                    this.upload();
+                  } 
+                  return response.data;
+                })
+               .catch((ex) => {
+                  console.log(ex.message);
+                  this.setState({
+                    progress: 0,
+                    message: "There was an issue!",
+                    currentFile: undefined,
+                    count: 0
+                  });
+                });
+                        
+  }
+
+
+  render() {
+    const {
+      selectedFiles,
+      currentFile,
+      progress,
+      message,
+      status,
+      result
+    } = this.state;
+
+
+    return (
+      <div className="services">
+        {currentFile && (
+          <div className="progress">
+            <div
+              className="progress-bar progress-bar-info progress-bar-striped"
+              role="progressbar"
+              aria-valuenow={progress}
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style={{ width: progress + "%" }}
+            >
+              {progress}%
+            </div>
+          </div>
+        )}
+
+        <label className="btn btn-default">
+          <input type="file" onChange={this.selectFile} />
+        </label>
+        
+        <div ontouchstart="">
+          <div className="button"
+            disabled={!selectedFiles}
+            onClick={this.upload}
+          >
+            <a href="#">Analyze</a>
           </div>
         </div>
 
-      </section>
-      
-      <br/>
-      <br/>
+        <div className="alert alert-light" role="alert">
+          {message}
+        </div>
 
-    </body>
-  </div>
-);
+        <div className="card">
+          <div className="card-header">Status: {status}</div> 
+        </div>
+
+        <div className="alert alert-light" role="alert">
+          <div dangerouslySetInnerHTML={{__html:result}}></div>
+        </div>
+        
+      </div>
+    );
+  }
 }
-
-export default Services;
