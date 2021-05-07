@@ -39,8 +39,9 @@ export default class UploadFiles extends Component {
               this.setState({
                 message: "",
                 progress: 0,
-                currentFile: currentFile
-                
+                currentFile: currentFile,
+                result: "",
+                status: ""
               });
               
                 UploadService.upload(currentFile, (event) => {
@@ -108,9 +109,8 @@ export default class UploadFiles extends Component {
               </div>
             )}
 
-            <label className="btn btn-default">
-              <input type="file" onChange={this.selectFile} />
-            </label>
+            <input type="file" onChange={this.selectFile} id="upload" hidden />
+            <label for="upload">Browse</label> 
             
             <div ontouchstart="">
               <div className="button"
